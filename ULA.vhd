@@ -1,6 +1,7 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
+use IEEE.math_real.all;
 
 entity ULA is
     port(
@@ -21,8 +22,8 @@ begin
                 saida <= entrada0-entrada1;
             when "10" =>
                 saida <= resize(entrada0*entrada1, 16);
-            --when "11" => 
-            --    saida <= entrada0**entrada1;
+            when "11" => 
+                saida <= to_unsigned(integer(real(to_integer(entrada0))**real(to_integer(entrada1))), 16);
             when others => 
                 saida <= (others => 'X');
         end case;

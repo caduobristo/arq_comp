@@ -54,20 +54,29 @@ begin
         wait for 2 ns;
         
         --casos de interesse
-        entrada0_tb <= to_unsigned(2, 16);
-        entrada1_tb <= to_unsigned(4, 16);
-        controle_tb <= "01";
-        wait for 2 ns;
 
+        --carry soma
         entrada0_tb <= "1111111111111111";
         entrada1_tb <= "1111111111111111";
-        controle_tb <= "11";
+        controle_tb <= "00";
         wait for 2 ns;
 
-        entrada0_tb <= "1111111111111111";
-        entrada1_tb <= "1111111111111111";
-        controle_tb <= "10";
-        wait for 2 ns;
+        --carry multiplicação
+        --entrada0_tb <= "1111111111111111";
+        --entrada1_tb <= "1111111111111111";
+        --controle_tb <= "10";
+        --wait for 2 ns;
+
+        --entrada0_tb <= to_unsigned(2, 16);
+        --entrada1_tb <= to_unsigned(4, 16);
+        --controle_tb <= "01";
+        --wait for 2 ns;
+
+        --entrada0_tb <= "1111111111111111";
+        --entrada1_tb <= "1111111111111111";
+        --controle_tb <= "11";
+        --wait for 2 ns;
+
         wait;
         
     end process processo_teste;

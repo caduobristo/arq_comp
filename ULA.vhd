@@ -18,26 +18,23 @@ begin
     begin
         case controle is
             when "00" =>
-                if entrada0+entrada1 > "1111111111111111" then
+                if to_integer(entrada0) + to_integer(entrada1) > 65535 then
                     carry <= '1';
                     saida <= resize(entrada0+entrada1, 16);
                 else
+                    carry <= '0';
                     saida <= entrada0+entrada1;
                 end if;
             when "01" =>
-                if entrada1 > entrada0 then
-                    negativo <= '1';
-                    saida <= entrada1-entrada0;
-                else
-                    saida <= entrada0-entrada1;
-                end if;
+                saida <= entrada0-entrada1;
             when "10" =>
-                if entrada0*entrada1 > "1111111111111111" then
-                    carry <= '1';
+                --if to_integer(entrada0) * to_integer(entrada1) > 65535 then
+                --    carry <= '1';
+                --    saida <= resize(entrada0*entrada1, 16);
+                --else
+                --   carry <= '0';
                     saida <= resize(entrada0*entrada1, 16);
-                else
-                    saida <= entrada0*entrada1;
-                end if;
+                --end if;
             when "11" => 
                 saida <= to_unsigned(integer(real(to_integer(entrada0))**real(to_integer(entrada1))), 16);
             when others => 

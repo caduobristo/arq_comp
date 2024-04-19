@@ -34,24 +34,24 @@ begin
     begin
         -- casos base
         entrada0_tb <= to_unsigned(3, 16);
-        entrada1_tb <= to_unsigned(1, 16);
+        entrada1_tb <= to_unsigned(3, 16);
         controle_tb <= "00";
-        wait for 2 ns;
+        wait for 5 ns;
         
         entrada0_tb <= to_unsigned(4, 16);
         entrada1_tb <= to_unsigned(2, 16);
         controle_tb <= "01";
-        wait for 2 ns;
+        wait for 5 ns;
         
         entrada0_tb <= to_unsigned(2, 16);
         entrada1_tb <= to_unsigned(2, 16);
         controle_tb <= "10";
-        wait for 2 ns;
+        wait for 5 ns;
         
         entrada0_tb <= to_unsigned(2, 16);
         entrada1_tb <= to_unsigned(3, 16);
         controle_tb <= "11";
-        wait for 2 ns;
+        wait for 5 ns;
         
         --casos de interesse
 
@@ -59,23 +59,25 @@ begin
         entrada0_tb <= "1111111111111111";
         entrada1_tb <= "1111111111111111";
         controle_tb <= "00";
-        wait for 2 ns;
+        wait for 5 ns;
 
+        --neg num
+        entrada0_tb <= to_unsigned(2, 16);
+        entrada1_tb <= to_unsigned(4, 16);
+        controle_tb <= "01";
+        wait for 5 ns;
+        
         --carry multiplicação
-        --entrada0_tb <= "1111111111111111";
-        --entrada1_tb <= "1111111111111111";
-        --controle_tb <= "10";
-        --wait for 2 ns;
-
-        --entrada0_tb <= to_unsigned(2, 16);
-        --entrada1_tb <= to_unsigned(4, 16);
-        --controle_tb <= "01";
-        --wait for 2 ns;
-
-        --entrada0_tb <= "1111111111111111";
-        --entrada1_tb <= "1111111111111111";
-        --controle_tb <= "11";
-        --wait for 2 ns;
+        entrada0_tb <= "0000000000000010";
+        entrada1_tb <= "1000000000000000";
+        controle_tb <= "10";
+        wait for 5 ns;
+        
+        --carry potencia
+        entrada0_tb <= "1000000000000000";
+        entrada1_tb <= "0000000000000010";
+        controle_tb <= "11";
+        wait for 5 ns;
 
         wait;
         

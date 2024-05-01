@@ -58,13 +58,12 @@ begin
         wr_en <= '0';
         data_in <= "0000000011110000";
         wait for 100 ns;
-        wr_en <= '1';
-        wait for 100 ns;
         data_in <= "1111111100000001";
+        wait for 100 ns;
+        wr_en <= '1';
         wait for 100 ns;
         data_in <= "0000101010010000";
         wait for 100 ns;
-        wr_en <= '0';
         data_in <= "0000000000000000";
         wait;
     end process;

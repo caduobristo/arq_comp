@@ -23,12 +23,12 @@ architecture a_ban_reg of ban_reg is
 
 begin   
     register1: reg16bits port map(clk => clk, rst => rst, wr_en => wr_en, data_in => data_in, data_out => reg1);
-    register2: reg16bits port map(clk => clk, rst => rst, wr_en => wr_en, data_in => data_in, data_out => reg1);
-    register3: reg16bits port map(clk => clk, rst => rst, wr_en => wr_en, data_in => data_in, data_out => reg1);
-    register4: reg16bits port map(clk => clk, rst => rst, wr_en => wr_en, data_in => data_in, data_out => reg1);
-    register5: reg16bits port map(clk => clk, rst => rst, wr_en => wr_en, data_in => data_in, data_out => reg1);
-    register6: reg16bits port map(clk => clk, rst => rst, wr_en => wr_en, data_in => data_in, data_out => reg1);
-    register7: reg16bits port map(clk => clk, rst => rst, wr_en => wr_en, data_in => data_in, data_out => reg1);
+    register2: reg16bits port map(clk => clk, rst => rst, wr_en => wr_en, data_in => data_in, data_out => reg2);
+    register3: reg16bits port map(clk => clk, rst => rst, wr_en => wr_en, data_in => data_in, data_out => reg3);
+    register4: reg16bits port map(clk => clk, rst => rst, wr_en => wr_en, data_in => data_in, data_out => reg4);
+    register5: reg16bits port map(clk => clk, rst => rst, wr_en => wr_en, data_in => data_in, data_out => reg5);
+    register6: reg16bits port map(clk => clk, rst => rst, wr_en => wr_en, data_in => data_in, data_out => reg6);
+    register7: reg16bits port map(clk => clk, rst => rst, wr_en => wr_en, data_in => data_in, data_out => reg7);
 
     reg_out1 <= reg1 when read1 = "001" else
                 reg2 when read1 = "010" else

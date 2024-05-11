@@ -6,7 +6,7 @@ entity program_counter_tb is
 end program_counter_tb;
 
 architecture a_program_counter_tb of program_counter_tb is
-    component toplevel is
+    component toplevel_pc is
         port ( clk : in std_logic);
     end component;
 
@@ -14,7 +14,7 @@ architecture a_program_counter_tb of program_counter_tb is
     signal   finished    : std_logic := '0';
     signal   clk         : std_logic;
 begin
-    uut: toplevel port map( clk => clk );
+    uut: toplevel_pc port map( clk => clk );
 
     sim_time_proc: process
     begin

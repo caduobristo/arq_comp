@@ -35,10 +35,10 @@ architecture top_levelarq of top_level is
    
 begin
     entrada1 <= reg_out2 when control_in = '1' else
-        top_in   when control_in = '0' else         
-        zero;
+                top_in   when control_in = '0' else         
+                zero;
 
-    port_ban_reg_init: ban_reg port map( 
+    m_ban_reg: ban_reg port map( 
         wr_en => wr_en_in, 
         rst => rst_in, 
         clk => clk_in, 
@@ -50,7 +50,7 @@ begin
         wrt => wrt
     );
 
-    port_ula_final: ULA port map(
+    m_ula: ULA port map(
         entrada0 => reg_out1, 
         entrada1 => entrada1, 
         saida => saida, 

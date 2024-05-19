@@ -3,13 +3,13 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity state_machine is
-  port ( clk, rst, enable : in std_logic;
-         state            : out std_logic
-  );
+    port ( clk, rst, enable : in std_logic;
+           state            : out std_logic
+    );
 end state_machine;
 
 architecture a_state_machine of state_machine is
-    signal state_s : std_logic;
+    signal state_s : std_logic := '0';
 begin
     process(clk, rst, enable)
     begin

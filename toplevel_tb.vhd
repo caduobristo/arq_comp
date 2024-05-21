@@ -7,24 +7,26 @@ end toplevel_tb;
 
 architecture a_toplevel_tb of toplevel_tb is
     component toplevel is
-        port( clk, rst, wr_en : in std_logic;
-              control_mux     : in std_logic;
-              control_ula     : in unsigned(1 downto 0);
-              constant_in     : in unsigned(15 downto 0);
-              saida           : out unsigned(15 downto 0)
-        );
+        port( clk, rst               : in std_logic;
+              state                  : out unsigned(1 downto 0);
+              pc                     : out unsigned(6 downto 0);
+              instr                  : out unsigned(15 downto 0);
+              reg1, reg2, a, ula_out : out unsigned(15 downto 0)
+    );
     end component;
 
-    constant period_time                     : time      := 100 ns;
-    signal   finished                        : std_logic := '0';
-    signal   clk, rst, wr_en, control_mux    : std_logic;
-    signal   saida                           : unsigned(15 downto 0);
-    signal   reg_out1, reg_out2, constant_in : unsigned(15 downto 0);
+    constant period_time            : time      := 100 ns;
+    signal   finished               : std_logic := '0';
+    signal   clk, rst  : std_logic;
+    signal   state     : unsigned(1 downto 0);
+    signal   pc                     : unsigned(6 downto 0);
+    signal   instr     : unsigned(15 downto 0);
+    signal   reg1, reg2, a, ula_out : unsigned(15 downto 0);
     
 begin
-    uut_toplevel: toplevel port map( clk => clk, rst => rst, wr_en => wr_en,
-                                     control_ula => "00", control_mux => control_mux, 
-                                     constant_in => constant_in, saida => saida);
+    uut_toplevel: toplevel port map( clk => clk, rst => rst,
+                                     state => state, pc => pc, instr => instr,
+                                     reg1 => reg1, reg2 => reg2, a => a, ula_out => ula_out );
 
     reset_global: process
     begin
@@ -36,7 +38,7 @@ begin
 
     sim_time_proc: process
     begin
-        wait for 3 us;
+        wait for 2 us;
         finished <= '1';
         wait;
     end process;

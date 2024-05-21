@@ -1,4 +1,3 @@
---teste
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -6,7 +5,7 @@ use ieee.numeric_std.all;
 entity ban_reg is
     port ( read1, read2, wrt  : in unsigned(2 downto 0);
            data_in            : in unsigned(15 downto 0);
-           clk, rst, wr_en    : in std_logic;
+           clk, rst           : in std_logic;
            reg_out1, reg_out2 : out unsigned(15 downto 0)
     );
 end ban_reg;
@@ -19,7 +18,7 @@ architecture a_ban_reg of ban_reg is
            );
     end component;  
 
-    signal reg1, reg2, reg3, reg4, reg5, reg6, reg7 : unsigned(15 downto 0);
+    signal reg1, reg2, reg3, reg4, reg5, reg6, reg7, reg_instr : unsigned(15 downto 0);
     signal zero : unsigned(15 downto 0) := "0000000000000000";
     signal mux : unsigned(6 downto 0);
 

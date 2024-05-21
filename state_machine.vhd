@@ -3,21 +3,23 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity state_machine is
-    port ( clk, rst, enable : in std_logic;
-           state            : out std_logic
+    port ( clk, rst : in std_logic;
+           state    : out unsigned(1 downto 0)
     );
 end state_machine;
 
 architecture a_state_machine of state_machine is
-    signal state_s : std_logic := '0';
+    signal state_s : unsigned(1 downto 0) := "00";
 begin
-    process(clk, rst, enable)
+    process(clk, rst)
     begin
         if rst = '1' then
-            state_s <= '0';
-        elsif enable = '1' then
-            if rising_edge(clk) then
-                state_s<= not state_s;
+            state_s <= "00";
+        elsif rising_edge(clk) then
+            if state_s = "01" then
+                state_s <= "00";
+            else
+                state_s <= state_s + 1;
             end if;
         end if;
     end process;

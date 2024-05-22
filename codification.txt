@@ -1,0 +1,29 @@
+MSB  b15              b0  LSB
+       |              |
+NOP  - 0000xxxxxxxxxxxx
+ADD  - 0001DDDxxxxxxxxx
+ADDI - 0010CCCCCCCCCCCC
+SUB  - 0011DDDxxxxxxxxx
+SUBI - 0100CCCCCCCCCCCC
+ANL  - 0101DDDxxxxxxxxx
+XRL  - 0110DDDxxxxxxxxx
+MOV  - 0111DDDxxxxxxxxx
+MOVC - 1000DDDxxxxxxxxx
+LI   - 1001CCCCCCCCCCCC
+LIC  - 1010DDDCCCCCCCCC
+JMP  - 1011AAAAAAAxxxxx
+CLR  - 1100xxxxxxxxxxxx
+
+SUB: x = não importa
+     D = operando 
+     C = constante 
+     A = endereço
+
+REGISTER CODE: zero => 000
+               R1   => 001
+               R2   => 010
+               R3   => 011
+               R4   => 100
+               R5   => 101
+               R6   => 110
+               R7   => 111

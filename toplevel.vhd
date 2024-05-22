@@ -1,4 +1,3 @@
---teste
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -10,8 +9,7 @@ entity toplevel is
           instr                  : out unsigned(15 downto 0);
           reg1, reg2, a, ula_out : out unsigned(15 downto 0)
     );
-end toplevel; 
-
+end toplevel;
 architecture a_toplevel of toplevel is
     component reg16bits is
         port ( clk, rst, wr_en : in std_logic;
@@ -54,38 +52,43 @@ architecture a_toplevel of toplevel is
         port ( clk                : in std_logic;
                instr              : in unsigned(15 downto 0);
                clk_rom            : out std_logic := '0';
-               mux_ula            : out std_logic;
-               state, control_ula : out unsigned(1 downto 0);
-               reg_ula            : out unsigned(2 downto 0);
+               mux_ula, mux_ban, wr_en_a : out std_logic;
+               mux_acc            : out std_logic_vector(1 downto 0); 
+               state, control_ula : out unsigned(1 downto 0); 
+               reg_ula, wrt_ban   : out unsigned(2 downto 0);
                adress             : out unsigned(6 downto 0);
-               const              : out unsigned(15 downto 0)
+               const              : out unsigned(15 downto 0)  
         );
     end component;
 
-    signal clk_rom, mux_ula                : std_logic;
-    signal control_ula                     : unsigned(1 downto 0);
-    signal read1, read2, wrt               : unsigned(2 downto 0);
-    signal ula_out_s, instr_s, a_s, const  : unsigned(15 downto 0);
-    signal reg_out1, reg_out2, entrada_ula : unsigned(15 downto 0);
-    signal adress_in, adress_out           : unsigned(6 downto 0);
+    signal clk_rom, mux_ula, mux_ban, wr_en_a : std_logic;
+    signal control_ula                          : unsigned(1 downto 0);
+    signal mux_acc                              : std_logic_vector(1 downto 0);
+    signal read1, read2, wrt_ban                : unsigned(2 downto 0);
+    signal ula_out_s, instr_s, a_s, const       : unsigned(15 downto 0);
+    signal reg_out1, reg_out2                   : unsigned(15 downto 0);
+    signal entrada_ula, entrada_acc, entrada_ban : unsigned(15 downto 0);
+    signal adress_in, adress_out                : unsigned(6 downto 0);
    
 begin
-    uut_ban_reg: ban_reg port map( read1 => read1, read2 => read2, wrt => wrt, 
-                                   data_in => ula_out_s, clk => clk, rst => rst,
+    uut_ban_reg: ban_reg port map( read1 => read1, read2 => wrt_ban, wrt => wrt_ban, 
+                                   data_in => entrada_ban, clk => clk, rst => rst,
                                    reg_out1 => reg_out1, reg_out2 => reg_out2 );
 
     uut_ula: ula port map( entrada0 => a_s, entrada1 => entrada_ula, 
                            control => control_ula, saida => ula_out_s );
 
-    uut_accumulator: reg16bits port map( clk => clk, rst => rst, wr_en => '1',
-                                         data_in => ula_out_s, data_out => a_s );
+    uut_accumulator: reg16bits port map( clk => clk_rom, rst => rst, wr_en => wr_en_a,
+                                         data_in => entrada_acc, data_out => a_s );
     
     uut_instruction: reg16bits port map( clk => clk, rst => rst, wr_en => '1',
                                          data_in => instr_s, data_out => instr );                                       
 
     uut_control_unit: control_unit port map ( clk => clk, instr => instr_s, clk_rom => clk_rom,
-                                              mux_ula => mux_ula, state => state, 
-                                              control_ula => control_ula, reg_ula => read1, 
+                                              mux_ula => mux_ula, mux_ban => mux_ban,
+                                              wr_en_a => wr_en_a, mux_acc => mux_acc, 
+                                              state => state, control_ula => control_ula, 
+                                              reg_ula => read1, wrt_ban => wrt_ban, 
                                               adress => adress_in, const => const );
 
     uut_pc: program_counter port map ( clk => clk, wr_en => '1', data_i => adress_in,
@@ -96,7 +99,13 @@ begin
     entrada_ula <= reg_out1 when mux_ula = '1' else
                    const;
 
-    read2 <= "010";
+    entrada_acc <= reg_out1 when mux_acc = "00" else
+                   const when mux_acc = "01" else 
+                   ula_out_s;
+   
+    entrada_ban <= const when mux_ban = '1' else
+                   a_s;
+    
     pc <= adress_out;
     reg1 <= reg_out1;
     reg2 <= reg_out2;

@@ -1,0 +1,32 @@
+[*]
+[*] GTKWave Analyzer v3.3.94 (w)1999-2018 BSI
+[*] Tue May 21 20:31:14 2024
+[*]
+[dumpfile] "C:\Users\caduo\OneDrive\Documentos\Facul\arq_comp\lab05\toplevel_tb.ghw"
+[dumpfile_mtime] "Tue May 21 20:30:09 2024"
+[dumpfile_size] 6011
+[savefile] "C:\Users\caduo\OneDrive\Documentos\Facul\arq_comp\lab05\toplevel_tb.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] 427 107
+*-29.305536 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.toplevel_tb.
+[sst_width] 197
+[signals_width] 118
+[sst_expanded] 1
+[sst_vpaned_height] 153
+@28
+top.toplevel_tb.clk
+@22
+#{top.toplevel_tb.pc[6:0]} top.toplevel_tb.pc[6] top.toplevel_tb.pc[5] top.toplevel_tb.pc[4] top.toplevel_tb.pc[3] top.toplevel_tb.pc[2] top.toplevel_tb.pc[1] top.toplevel_tb.pc[0]
+#{top.toplevel_tb.instr[15:0]} top.toplevel_tb.instr[15] top.toplevel_tb.instr[14] top.toplevel_tb.instr[13] top.toplevel_tb.instr[12] top.toplevel_tb.instr[11] top.toplevel_tb.instr[10] top.toplevel_tb.instr[9] top.toplevel_tb.instr[8] top.toplevel_tb.instr[7] top.toplevel_tb.instr[6] top.toplevel_tb.instr[5] top.toplevel_tb.instr[4] top.toplevel_tb.instr[3] top.toplevel_tb.instr[2] top.toplevel_tb.instr[1] top.toplevel_tb.instr[0]
+@28
+#{top.toplevel_tb.state[1:0]} top.toplevel_tb.state[1] top.toplevel_tb.state[0]
+@22
+#{top.toplevel_tb.a[15:0]} top.toplevel_tb.a[15] top.toplevel_tb.a[14] top.toplevel_tb.a[13] top.toplevel_tb.a[12] top.toplevel_tb.a[11] top.toplevel_tb.a[10] top.toplevel_tb.a[9] top.toplevel_tb.a[8] top.toplevel_tb.a[7] top.toplevel_tb.a[6] top.toplevel_tb.a[5] top.toplevel_tb.a[4] top.toplevel_tb.a[3] top.toplevel_tb.a[2] top.toplevel_tb.a[1] top.toplevel_tb.a[0]
+#{top.toplevel_tb.reg1[15:0]} top.toplevel_tb.reg1[15] top.toplevel_tb.reg1[14] top.toplevel_tb.reg1[13] top.toplevel_tb.reg1[12] top.toplevel_tb.reg1[11] top.toplevel_tb.reg1[10] top.toplevel_tb.reg1[9] top.toplevel_tb.reg1[8] top.toplevel_tb.reg1[7] top.toplevel_tb.reg1[6] top.toplevel_tb.reg1[5] top.toplevel_tb.reg1[4] top.toplevel_tb.reg1[3] top.toplevel_tb.reg1[2] top.toplevel_tb.reg1[1] top.toplevel_tb.reg1[0]
+@23
+#{top.toplevel_tb.reg2[15:0]} top.toplevel_tb.reg2[15] top.toplevel_tb.reg2[14] top.toplevel_tb.reg2[13] top.toplevel_tb.reg2[12] top.toplevel_tb.reg2[11] top.toplevel_tb.reg2[10] top.toplevel_tb.reg2[9] top.toplevel_tb.reg2[8] top.toplevel_tb.reg2[7] top.toplevel_tb.reg2[6] top.toplevel_tb.reg2[5] top.toplevel_tb.reg2[4] top.toplevel_tb.reg2[3] top.toplevel_tb.reg2[2] top.toplevel_tb.reg2[1] top.toplevel_tb.reg2[0]
+[pattern_trace] 1
+[pattern_trace] 0

@@ -43,7 +43,12 @@ begin
             end case;
             case state_s is
                 when "00" =>
-                    adress_s <= adress_s + 1;
+                    case opcode is
+                        when "1011" =>
+                            adress_s <= adress_s;
+                        when others =>
+                            adress_s <= adress_s + 1;
+                    end case;
                     clk_rom <= '1';
                 when "01" =>
                     clk_rom <= '0';
@@ -66,6 +71,7 @@ begin
                         when "0100" => 
                             mux_acc <= "10";
                             control_ula <= "01";   
+                            mux_ula <= '0';
                             const <= resize(instr(11 downto 0), 16); 
                         when "0101" =>
                             mux_acc <= "10";

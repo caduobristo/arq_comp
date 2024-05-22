@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity control_unit is
-    port ( clk                       : in std_logic;
+    port ( clk, rst                  : in std_logic;
            instr                     : in unsigned(15 downto 0);
            clk_rom                   : out std_logic := '0';
            mux_ula, mux_ban, wr_en_a : out std_logic;
@@ -26,13 +26,12 @@ architecture a_control_unit of control_unit is
     signal state_s  : unsigned(1 downto 0);
     signal opcode   : unsigned(3 downto 0);
 begin
-    uut_state_machine: state_machine port map ( clk => clk, rst => '0', 
-                                                state => state_s ); 
+    uut_state_machine: state_machine port map ( clk, rst, state_s ); 
 
     opcode <= instr(15 downto 12);
     process(clk)
     begin
-        if rising_edge(clk) then
+        if rising_edge(clk) and rst /= '1' then
             case opcode is
                 when "1000" =>
                     wr_en_a <= '0';

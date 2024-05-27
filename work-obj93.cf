@@ -1,28 +1,31 @@
 v 4
-file . "toplevel_tb.vhd" "d91e135dabe438d738a8f4034eee801e17064b15" "20240522210039.125":
-  entity toplevel_tb at 1( 0) + 0 on 27;
-  architecture a_toplevel_tb of toplevel_tb at 8( 117) + 0 on 28;
-file . "program_counter.vhd" "a995dc0167f8a3cd9f74277bcea037f712dd5619" "20240522210038.649":
-  entity program_counter at 1( 0) + 0 on 23;
-  architecture a_program_counter of program_counter at 12( 278) + 0 on 24;
-file . "control_unit.vhd" "887737e5d8def5a7b69ca7f697706563ea73e69a" "20240522210038.209":
-  entity control_unit at 1( 0) + 0 on 19;
-  architecture a_control_unit of control_unit at 18( 702) + 0 on 20;
-file . "rom.vhd" "82e93ded4caf0098df6462dcdda47026a4872c42" "20240522210037.785":
-  entity rom at 1( 0) + 0 on 15;
-  architecture a_rom of rom at 12( 230) + 0 on 16;
-file . "reg16bits.vhd" "369e4eecad3a8b49c6d8a90ee008625aac0d0535" "20240522210037.351":
-  entity reg16bits at 1( 0) + 0 on 11;
-  architecture a_reg16bits of reg16bits at 12( 274) + 0 on 12;
-file . "ban_reg.vhd" "b61198ef44fc93effd37afd60f3d7da4447d3895" "20240522210037.568":
-  entity ban_reg at 1( 0) + 0 on 13;
-  architecture a_ban_reg of ban_reg at 13( 360) + 0 on 14;
-file . "state_machine.vhd" "e174819961a2c2492fdd42c829eb6d881fbcd5ca" "20240522210037.997":
+file . "processador_tb.vhd" "8dfcab8465020b3bdfb6fbdf6a9fa5dd28b4f4b6" "20240527181607.333":
+  entity processador_tb at 1( 0) + 0 on 29;
+  architecture a_processador_tb of processador_tb at 8( 123) + 0 on 30;
+file . "program_counter.vhd" "a995dc0167f8a3cd9f74277bcea037f712dd5619" "20240527181606.879":
+  entity program_counter at 1( 0) + 0 on 25;
+  architecture a_program_counter of program_counter at 12( 278) + 0 on 26;
+file . "control_unit.vhd" "1fa9ab5e474d2e61042153dc63bda769b4ec67b2" "20240527181606.425":
+  entity control_unit at 1( 0) + 0 on 21;
+  architecture a_control_unit of control_unit at 19( 767) + 0 on 22;
+file . "state_machine.vhd" "ca221b76593b8bd2d0c2477f92636b9d05a48873" "20240527181605.996":
   entity state_machine at 1( 0) + 0 on 17;
   architecture a_state_machine of state_machine at 11( 214) + 0 on 18;
-file . "ula.vhd" "dea7bda480727de794bf26a2f711345dc12464d2" "20240522210038.428":
-  entity ula at 1( 0) + 0 on 21;
-  architecture a_ula of ula at 13( 314) + 0 on 22;
-file . "toplevel.vhd" "0fe5bff6e3ca5885cf1663681955928495a61a8b" "20240522210038.866":
-  entity toplevel at 1( 0) + 0 on 25;
-  architecture a_toplevel of toplevel at 14( 444) + 0 on 26;
+file . "ban_reg.vhd" "b61198ef44fc93effd37afd60f3d7da4447d3895" "20240527181605.567":
+  entity ban_reg at 1( 0) + 0 on 13;
+  architecture a_ban_reg of ban_reg at 13( 360) + 0 on 14;
+file . "reg16bits.vhd" "369e4eecad3a8b49c6d8a90ee008625aac0d0535" "20240527181605.354":
+  entity reg16bits at 1( 0) + 0 on 11;
+  architecture a_reg16bits of reg16bits at 12( 274) + 0 on 12;
+file . "rom.vhd" "1f037ecd1ad1e4f39b056c144eabe7fa07f9e6a8" "20240527181605.783":
+  entity rom at 1( 0) + 0 on 15;
+  architecture a_rom of rom at 12( 230) + 0 on 16;
+file . "adder.vhd" "11cbe6f9892966af89fb21fc77869531aeb1557e" "20240527181606.209":
+  entity adder at 1( 0) + 0 on 19;
+  architecture a_adder of adder at 14( 334) + 0 on 20;
+file . "ula.vhd" "dea7bda480727de794bf26a2f711345dc12464d2" "20240527181606.642":
+  entity ula at 1( 0) + 0 on 23;
+  architecture a_ula of ula at 13( 314) + 0 on 24;
+file . "processador.vhd" "c9e6170516b55e2271e91fc38c630619f6a6a230" "20240527181607.093":
+  entity processador at 1( 0) + 0 on 27;
+  architecture a_processador of processador at 14( 450) + 0 on 28;

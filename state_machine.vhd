@@ -16,7 +16,7 @@ begin
         if rst = '1' then
             state_s <= "00";
         elsif rising_edge(clk) then
-            if state_s = "01" then
+            if state_s = "10" then
                 state_s <= "00";
             else
                 state_s <= state_s + 1;

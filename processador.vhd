@@ -29,6 +29,7 @@ architecture a_processador of processador is
 
     component ula is
         port( entrada0, entrada1      : in unsigned(15 downto 0);
+              opcode                  : in unsigned(3 downto 0);
               control                 : in unsigned(1 downto 0);
               saida                   : out unsigned(15 downto 0);
               Z, carry_sum, carry_sub : out std_logic
@@ -83,7 +84,7 @@ begin
     uut_ban_reg: ban_reg port map( reg_in, wrt_ban, ban_in, clk, rst, reg_out,
                                    reg0, reg1, reg2, reg3, reg4, reg5, reg6, reg7 );
 
-    uut_ula: ula port map( a_s, ula_in, control_ula, ula_out_s, Z, carry_sum, carry_sub );
+    uut_ula: ula port map( a_s, ula_in, instr_s(15 downto 12), control_ula, ula_out_s, Z, carry_sum, carry_sub );
 
     uut_accumulator: reg16bits port map( clk, rst, wr_en_a, acc_in, a_s );
     

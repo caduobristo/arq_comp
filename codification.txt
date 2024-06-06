@@ -7,11 +7,10 @@ SUB  - 0011DDDxxxxxxxxx
 SUBI - 0100CCCCCCCCCCCC
 ANL  - 0101DDDxxxxxxxxx
 XRL  - 0110DDDxxxxxxxxx
-MOV  - 0111DDDxxxxxxxxx
-MOVC - 1000DDDxxxxxxxxx
-LI   - 1001CCCCCCCCCCCC
-LIC  - 1010DDDCCCCCCCCC
-JMP  - 1011AAAAAAAxxxxx
+MOV  - 0111DDDAxxxxxxxx
+LI   - 1001DDDACCCCCCCC
+CMP  - 1010DDDCCCCCCCCC
+JMP  - 1011EEEEEEExxxxx
 CLR  - 1100xxxxxxxxxxxx
 JNZ  - 1101CCCCCCCxxxxx
 JZ   - 1110CCCCCCCxxxxx
@@ -20,7 +19,9 @@ JC   - 1111CCCCCCCxxxxx
 SUB: x = não importa
      D = operando 
      C = constante 
-     A = endereço
+     E = endereço
+     A = 1 -> aculador
+         0 -> registrador
 
 REGISTER CODE: zero => 000
                R1   => 001

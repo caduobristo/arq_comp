@@ -5,6 +5,7 @@ use IEEE.math_real.all;
 
 entity ula is
     port( entrada0, entrada1      : in unsigned(15 downto 0);
+          opcode                  : in unsigned(3 downto 0);
           control                 : in unsigned(1 downto 0);
           saida                   : out unsigned(15 downto 0);
           Z, carry_sum, carry_sub : out std_logic
@@ -12,7 +13,7 @@ entity ula is
 end entity ula;
 
 architecture a_ula of ula is
-    signal Z_s, carry_sums, carry_subs :  std_logic := '0';
+    signal Z_s, carry_sums, carry_subs : std_logic := '0';
     signal saida_s                     : unsigned(15 downto 0);
     signal e0_s17, e1_s17, s17         : unsigned(16 downto 0);
 begin                                   
@@ -22,9 +23,11 @@ begin
                entrada0 xor entrada1                     when control = "11" else
                (others => '0');
 
-    Z_s <= '1' when control = "01" and
+    Z_s <= '1' when opcode = "1010" and
+                    control = "01" and
                     saida_s = "0000000000000000" else
-           '0'  when control = "01" else
+           '0' when opcode = "1010" and
+                    control = "01" else
            Z_s; 
 
     e0_s17 <= '0' & entrada0;

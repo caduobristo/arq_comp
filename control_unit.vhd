@@ -36,8 +36,8 @@ begin
     reg_ula <= instr(11 downto 9);
 
     const <= resize(instr(11 downto 0), 16) when opcode = "0010" or
-                                                 opcode = "0100" or
-                                                 opcode = "1001" else
+                                                 opcode = "0100" else
+             resize(instr(7 downto 0), 16) when opcode = "1001" else
              resize(instr(8 downto 0), 16)  when opcode = "1010" else
              (others => '0');
 
@@ -45,16 +45,19 @@ begin
                         clk_rom_s = '1' else
                '0';  
   
-    mux_acc <= "00" when opcode = "0111" else
-               "01" when opcode = "1001" or
+    mux_acc <= "00" when opcode = "0111" or 
+                         opcode = "1010" else
+               "01" when (opcode = "1001" and
+                          instr(8) = '1') or
                          opcode = "1100" else
                "10";  
     
     control_ula <= "00" when opcode = "0001" or
                              opcode = "0010" or
-                             opcode = "1101" or (opcode = "0011" and Z = '1') else
+                             opcode = "1101" else
                    "01" when opcode = "0011" or
-                             opcode = "1000" else
+                             opcode = "1000" or
+                             opcode = "1010" else
                    "10" when opcode = "0101" else
                    "11";  
     
@@ -64,24 +67,30 @@ begin
                         opcode = "0110" else
                '0';
     
-    mux_ban <= '1' when opcode = "1010" else
+    mux_ban <= '1' when opcode = "1001" and
+                        instr(8) = '0' else
                '0';
         
-    wr_en_a <= '1' when state = "01" and
+    wr_en_a <= '1' when opcode = "1010" or
+                        (state = "01" and
                         (opcode = "0001" or
                         opcode = "0010" or
                         opcode = "0011" or
                         opcode = "0100" or
                         opcode = "0101" or
                         opcode = "0110" or
-                        opcode = "0111" or
-                        opcode = "1001" or
-                        opcode = "1100") else
+                        opcode = "1100" or
+                        (opcode = "0111" and
+                        instr(8) = '1') or
+                        (opcode = "1001" and
+                        instr(8) = '1'))) else
                '0';
         
     wrt_ban <= instr(11 downto 9) when state = "01" and
-                                       (opcode = "1000" or
-                                       opcode = "1010") else
+                                       ((opcode = "0111" and
+                                       instr(8) = '0') or
+                                       (opcode = "1001" and
+                                       instr(8) = '0')) else
                "000";
 
 end a_control_unit;

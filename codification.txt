@@ -5,14 +5,17 @@ ADD  - 0001DDDxxxxxxxxx
 ADDI - 0010CCCCCCCCCCCC
 SUB  - 0011DDDxxxxxxxxx
 SUBI - 0100CCCCCCCCCCCC
-ANL  - 0101DDDxxxxxxxxx 
+ANL  - 0101DDDxxxxxxxxx
 XRL  - 0110DDDxxxxxxxxx
 MOV  - 0111DDDxxxxxxxxx
-MOVC - 1000DDDxxxxxxxxx 
+MOVC - 1000DDDxxxxxxxxx
 LI   - 1001CCCCCCCCCCCC
-LIC  - 1010DDDCCCCCCCCC 
-JMP  - 1011AAAAAAAxxxxx 
-CLR  - 1100xxxxxxxxxxxx 
+LIC  - 1010DDDCCCCCCCCC
+JMP  - 1011AAAAAAAxxxxx
+CLR  - 1100xxxxxxxxxxxx
+JNZ  - 1101CCCCCCCxxxxx
+JZ   - 1110CCCCCCCxxxxx
+JC   - 1111CCCCCCCxxxxx
 
 SUB: x = não importa
      D = operando 
@@ -27,3 +30,5 @@ REGISTER CODE: zero => 000
                R5   => 101
                R6   => 110
                R7   => 111
+if opcode = x
+	ende = ende + aaaaaa

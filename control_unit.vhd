@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity control_unit is
-    port ( clk, rst                  : in std_logic;
+    port ( clk, rst, Z               : in std_logic;
            state                     : in unsigned(1 downto 0);
            instr                     : in unsigned(15 downto 0);
            clk_rom                   : out std_logic := '0';
@@ -18,7 +18,7 @@ end control_unit;
 
 architecture a_control_unit of control_unit is
 component adder is 
-    port ( clk, rst : in std_logic;
+    port ( clk, rst, Z : in std_logic;
            state    : in unsigned(1 downto 0);
            instr    : in unsigned(15 downto 0);
            clk_rom  : out std_logic;
@@ -30,7 +30,7 @@ end component;
     signal clk_rom_s : std_logic;
 begin
 
-    uut_adder: adder port map( clk, rst, state, instr, clk_rom_s, adress);
+    uut_adder: adder port map( clk, rst, Z, state, instr, clk_rom_s, adress);
 
     opcode <= instr(15 downto 12);
     reg_ula <= instr(11 downto 9);
@@ -51,7 +51,8 @@ begin
                "10";  
     
     control_ula <= "00" when opcode = "0001" or
-                             opcode = "0010" else
+                             opcode = "0010" or
+                             opcode = "1101" or (opcode = "0011" and Z = '1') else
                    "01" when opcode = "0011" or
                              opcode = "1000" else
                    "10" when opcode = "0101" else

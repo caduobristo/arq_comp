@@ -45,6 +45,11 @@ begin
         entrada1 <= to_unsigned(2, 16);
         controle <= "11";
         wait for 5 ns;
+
+        entrada0 <= to_unsigned(65535, 16);
+        entrada1 <= to_unsigned(65535, 16);
+        controle <= "00";
+        wait for 5 ns;
         wait;
         
     end process processo_teste;

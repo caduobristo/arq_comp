@@ -9,18 +9,17 @@ ANL  - 0101DDDxxxxxxxxx
 XRL  - 0110DDDxxxxxxxxx
 MOV  - 0111DDDAxxxxxxxx
 LI   - 1001DDDACCCCCCCC
-CMP  - 1010DDDCCCCCCCCC
+CMPI - 1010DDDCCCCCCCCC
 JMP  - 1011EEEEEEExxxxx
 CLR  - 1100xxxxxxxxxxxx
-JNZ  - 1101CCCCCCCxxxxx
-JZ   - 1110CCCCCCCxxxxx
-JC   - 1111CCCCCCCxxxxx
+JZ   - 1101CCCCCCCxxxxx
+JC   - 1110CCCCCCCxxxxx
 
 SUB: x = não importa
      D = operando 
      C = constante 
      E = endereço
-     A = 1 -> aculador
+     A = 1 -> acumulador
          0 -> registrador
 
 REGISTER CODE: zero => 000

@@ -13,9 +13,9 @@ entity ula is
 end entity ula;
 
 architecture a_ula of ula is
-    signal Z_s, carry_sums, carry_subs : std_logic := '0';
-    signal saida_s                     : unsigned(15 downto 0);
-    signal e0_s17, e1_s17, s17         : unsigned(16 downto 0);
+    signal Z_s, carry_sum_s, carry_sub_s : std_logic := '0';
+    signal saida_s                       : unsigned(15 downto 0);
+    signal e0_s17, e1_s17, s17           : unsigned(16 downto 0);
 begin                                   
     saida_s <= resize(entrada0 + entrada1, saida'length) when control = "00" else
                entrada0-entrada1                         when control = "01" else
@@ -24,22 +24,24 @@ begin
                (others => '0');
 
     Z_s <= '1' when opcode = "1010" and
-                    control = "01" and
                     saida_s = "0000000000000000" else
-           '0' when opcode = "1010" and
-                    control = "01" else
+           '0' when opcode = "1010" else
            Z_s; 
 
     e0_s17 <= '0' & entrada0;
     e1_s17 <= '0' & entrada1;
     s17 <= e0_s17 + e1_s17;
 
-    carry_sum <= s17(16);
+    carry_sum_s <= s17(16) when opcode = "1010" else
+                   carry_sum_s;
 
-    carry_sub <= '1' when entrada0 < entrada1 and
-                 control = "11" else
-                 '0';
+    carry_sub_s <= '1' when entrada0 < entrada1 and
+                          opcode = "1010" else
+                   '0' when opcode = "1010" else
+                   carry_sub_s;
 
+    carry_sum <= carry_sum_s;
+    carry_sub <= carry_sub_s;
     Z <= Z_s;
     saida <= saida_s;
 end architecture a_ula;

@@ -58,16 +58,16 @@ architecture a_processador of processador is
     end component;
 
     component control_unit is
-        port ( clk, rst, Z               : in std_logic;
-               state                     : in unsigned(1 downto 0);
-               instr                     : in unsigned(15 downto 0);
-               clk_rom                   : out std_logic := '0';
-               mux_ula, mux_ban, wr_en_a : out std_logic;
-               mux_acc                   : out std_logic_vector(1 downto 0); 
-               control_ula               : out unsigned(1 downto 0); 
-               reg_ula, wrt_ban          : out unsigned(2 downto 0);
-               adress                    : out unsigned(6 downto 0);
-               const                     : out unsigned(15 downto 0)  
+        port ( clk, rst, Z, carry_sum, carry_sub : in std_logic;
+               state                             : in unsigned(1 downto 0);
+               instr                             : in unsigned(15 downto 0);
+               clk_rom                           : out std_logic := '0';
+               mux_ula, mux_ban, wr_en_a         : out std_logic;
+               mux_acc                           : out std_logic_vector(1 downto 0);
+               control_ula                       : out unsigned(1 downto 0);
+               reg_ula, wrt_ban                  : out unsigned(2 downto 0);
+               adress                            : out unsigned(6 downto 0);
+               const                             : out unsigned(15 downto 0)
         );
     end component;
 
@@ -92,10 +92,10 @@ begin
     
     uut_state_machine: state_machine port map ( clk, rst, state_s );
 
-    uut_control_unit: control_unit port map ( clk, rst, Z, state_s, instr_s, clk_rom,
-                                              mux_ula, mux_ban, wr_en_a, mux_acc,
-                                              control_ula, reg_in, wrt_ban, adress_in,
-                                              const );
+    uut_control_unit: control_unit port map ( clk, rst, Z, carry_sum, carry_sub, state_s,
+                                              instr_s, clk_rom, mux_ula, mux_ban, wr_en_a, 
+                                              mux_acc, control_ula, reg_in, wrt_ban, 
+                                              adress_in, const );
 
     uut_pc: program_counter port map ( clk_rom, '1', rst, adress_in, adress_out );
 

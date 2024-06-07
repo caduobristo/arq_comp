@@ -3,26 +3,26 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity control_unit is
-    port ( clk, rst, Z               : in std_logic;
-           state                     : in unsigned(1 downto 0);
-           instr                     : in unsigned(15 downto 0);
-           clk_rom                   : out std_logic := '0';
-           mux_ula, mux_ban, wr_en_a : out std_logic;
-           mux_acc                   : out std_logic_vector(1 downto 0);
-           control_ula               : out unsigned(1 downto 0);
-           reg_ula, wrt_ban          : out unsigned(2 downto 0);
-           adress                    : out unsigned(6 downto 0);
-           const                     : out unsigned(15 downto 0)
+    port ( clk, rst, Z, carry_sum, carry_sub : in std_logic;
+           state                             : in unsigned(1 downto 0);
+           instr                             : in unsigned(15 downto 0);
+           clk_rom                           : out std_logic := '0';
+           mux_ula, mux_ban, wr_en_a         : out std_logic;
+           mux_acc                           : out std_logic_vector(1 downto 0);
+           control_ula                       : out unsigned(1 downto 0);
+           reg_ula, wrt_ban                  : out unsigned(2 downto 0);
+           adress                            : out unsigned(6 downto 0);
+           const                             : out unsigned(15 downto 0)
     );
 end control_unit;
 
 architecture a_control_unit of control_unit is
 component adder is 
-    port ( clk, rst, Z : in std_logic;
-           state    : in unsigned(1 downto 0);
-           instr    : in unsigned(15 downto 0);
-           clk_rom  : out std_logic;
-           adress   : out unsigned(6 downto 0)
+    port ( clk, rst, Z, carry_sub : in std_logic;
+           state                  : in unsigned(1 downto 0);
+           instr                  : in unsigned(15 downto 0);
+           clk_rom                : out std_logic;
+           adress                 : out unsigned(6 downto 0)
     );
 end component;
 
@@ -30,7 +30,7 @@ end component;
     signal clk_rom_s : std_logic;
 begin
 
-    uut_adder: adder port map( clk, rst, Z, state, instr, clk_rom_s, adress);
+    uut_adder: adder port map( clk, rst, Z, carry_sub, state, instr, clk_rom_s, adress);
 
     opcode <= instr(15 downto 12);
     reg_ula <= instr(11 downto 9);

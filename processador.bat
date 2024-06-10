@@ -6,6 +6,8 @@ ghdl -a ban_reg.vhd
 ghdl -e ban_reg
 ghdl -a rom.vhd
 ghdl -e rom
+ghdl -a ram.vhd
+ghdl -e ram
 ghdl -a state_machine.vhd
 ghdl -e state_machine
 ghdl -a adder.vhd

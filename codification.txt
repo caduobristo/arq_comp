@@ -1,19 +1,21 @@
 MSB  b15              b0  LSB
        |              |
-NOP  - 0000xxxxxxxxxxxx
-ADD  - 0001DDDxxxxxxxxx
-ADDI - 0010CCCCCCCCCCCC
-SUB  - 0011DDDxxxxxxxxx
-SUBI - 0100CCCCCCCCCCCC
-ANL  - 0101DDDxxxxxxxxx
-XRL  - 0110DDDxxxxxxxxx
-MOV  - 0111DDDAxxxxxxxx
-LI   - 1001DDDACCCCCCCC
-CMPI - 1010DDDCCCCCCCCC
-JMP  - 1011EEEEEEExxxxx
-CLR  - 1100xxxxxxxxxxxx
-JZ   - 1101CCCCCCCxxxxx
-JC   - 1110CCCCCCCxxxxx
+NOP  - 0000xxxxxxxxxxxx - Sem operação
+ADD  - 0001DDDxxxxxxxxx - Adiciona um registrador ao acumulador
+ADDI - 0010CCCCCCCCCCCC - Adiciona uma constante ao acumulador
+SUB  - 0011DDDxxxxxxxxx - Subtrai um registrador do acumulador
+SUBI - 0100CCCCCCCCCCCC - Subtrai uma constante do acumulador
+ANL  - 0101DDDxxxxxxxxx - AND registrador e acumulador
+XRL  - 0110DDDxxxxxxxxx - OR registrador e acumulador
+MOV  - 0111DDDAxxxxxxxx - Move registrador para acumulador (vice e versa)
+MOVX - 1000DDDxxxxxxxxx - Move do endereço de RAM  @Ri para o acumulador
+LI   - 1001DDDACCCCCCCC - Carrega o acumulador ou registrador com constante
+CMPI - 1010DDDCCCCCCCCC - Faz comparações
+JMP  - 1011EEEEEEExxxxx - Pula para endereço absoluto
+CLR  - 1100xxxxxxxxxxxx - Limpa o acumulador
+JZ   - 1101CCCCCCCxxxxx - Pulo indireto se Z = '0'
+JC   - 1110CCCCCCCxxxxx - Pulo indireto se C = '1'
+MOVX - 1111DDDxxxxxxxxx - Move o acumulador para o endereço de RAM @Ri
 
 SUB: x = não importa
      D = operando 
@@ -30,5 +32,3 @@ REGISTER CODE: zero => 000
                R5   => 101
                R6   => 110
                R7   => 111
-if opcode = x
-	ende = ende + aaaaaa

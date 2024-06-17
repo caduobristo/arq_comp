@@ -19,6 +19,12 @@ architecture a_processador of processador is
         );
     end component;
 
+    component reg1bit is
+        port( clk, rst, wr_en, data_in : in std_logic;
+              data_out                 : out std_logic
+        );
+    end component;
+
     component ban_reg is
         port ( read_in, wrt : in unsigned(2 downto 0);
                data_in      : in unsigned(15 downto 0);
@@ -28,12 +34,11 @@ architecture a_processador of processador is
     end component;
 
     component ula is
-        port( entrada0, entrada1      : in unsigned(15 downto 0);
-              opcode                  : in unsigned(3 downto 0);
-              control                 : in unsigned(1 downto 0);
-              saida                   : out unsigned(15 downto 0);
-              Z, carry_sum, carry_sub : out std_logic
-        );
+        port( entrada0, entrada1 : in unsigned(15 downto 0);
+              control            : in unsigned(1 downto 0);
+              saida              : out unsigned(15 downto 0);
+              Z, carry           : out std_logic
+            );
     end component;
 
     component rom is
@@ -58,16 +63,17 @@ architecture a_processador of processador is
     end component;
 
     component control_unit is
-        port ( clk, rst, Z, carry_sum, carry_sub : in std_logic;
-               state                             : in unsigned(1 downto 0);
-               instr, reg_out                    : in unsigned(15 downto 0);
-               clk_rom                           : out std_logic := '0';
-               mux_ula, mux_ban, wr_en_a, wr_en_ram : out std_logic;
-               mux_acc                           : out std_logic_vector(1 downto 0);
-               control_ula                       : out unsigned(1 downto 0);
-               reg, wrt_ban                      : out unsigned(2 downto 0);
-               adress, ram_adress                : out unsigned(6 downto 0);
-               const                             : out unsigned(15 downto 0)
+        port ( clk, rst, Z, carry           : in std_logic;
+               state                        : in unsigned(1 downto 0);
+               instr, reg_out               : in unsigned(15 downto 0);
+               clk_rom                      : out std_logic := '0';
+               mux_ula, mux_ban             : out std_logic;
+               wr_en_a, wr_en_ram, wr_carry, wr_z : out std_logic;
+               mux_acc                      : out std_logic_vector(1 downto 0);
+               control_ula                  : out unsigned(1 downto 0);
+               reg, wrt_ban                 : out unsigned(2 downto 0);
+               adress, ram_adress           : out unsigned(6 downto 0);
+               const                        : out unsigned(15 downto 0)
         );
     end component;
 
@@ -79,7 +85,7 @@ architecture a_processador of processador is
         );
     end component;
 
-    signal Z, carry_sum, carry_sub, wr_en_ram      : std_logic := '0';
+    signal z_s, z, carry_s, carry, wr_ram, wr_carry, wr_z: std_logic := '0';
     signal clk_rom, mux_ula, mux_ban, wr_en_a      : std_logic := '0';
     signal control_ula, state_s                    : unsigned(1 downto 0) := "00";
     signal mux_acc                                 : std_logic_vector(1 downto 0) := "00";
@@ -92,24 +98,28 @@ begin
     uut_ban_reg: ban_reg port map( reg_in, wrt_ban, ban_in, clk, rst, reg_out,
                                    reg0, reg1, reg2, reg3, reg4, reg5, reg6, reg7 );
 
-    uut_ula: ula port map( a_s, ula_in, instr_s(15 downto 12), control_ula, ula_out_s, Z, carry_sum, carry_sub );
+    uut_ula: ula port map( a_s, ula_in, control_ula, ula_out_s, z_s, carry_s );
 
     uut_accumulator: reg16bits port map( clk, rst, wr_en_a, acc_in, a_s );
     
-    uut_instruction: reg16bits port map( clk, rst, '1', instr_s, instr );  
+    uut_instruction: reg16bits port map( clk, rst, '1', instr_s, instr ); 
     
+    uut_carry : reg1bit port map( clk, rst, wr_carry, carry_s, carry );
+
+    uut_z : reg1bit port map( clk, rst, wr_z, z_s, z );
+
     uut_state_machine: state_machine port map ( clk, rst, state_s );
 
-    uut_control_unit: control_unit port map ( clk, rst, Z, carry_sum, carry_sub, state_s,
+    uut_control_unit: control_unit port map ( clk, rst, z, carry, state_s,
                                               instr_s, reg_out, clk_rom, mux_ula, mux_ban, wr_en_a, 
-                                              wr_en_ram, mux_acc, control_ula, reg_in, wrt_ban, 
+                                              wr_ram, wr_carry, wr_z, mux_acc, control_ula, reg_in, wrt_ban, 
                                               adress_in, ram_adress, const );
 
     uut_pc: program_counter port map ( clk_rom, '1', rst, adress_in, adress_out );
 
     uut_rom: rom port map ( clk_rom, adress_out, instr_s );
 
-    uut_ram: ram port map ( clk, wr_en_ram, ram_adress, a_s, ram_out_s );
+    uut_ram: ram port map ( clk, wr_ram, ram_adress, a_s, ram_out_s );
 
     ula_in <= reg_out when mux_ula = '1' else
               const;

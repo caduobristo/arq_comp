@@ -4,10 +4,10 @@ use ieee.numeric_std.all;
 
 entity adder is
     port ( clk, rst, z, carry : in std_logic;
-           state                  : in unsigned(1 downto 0);
-           instr                  : in unsigned(15 downto 0);
-           clk_rom                : out std_logic;
-           adress                 : out unsigned(6 downto 0)
+           state              : in unsigned(1 downto 0);
+           instr, reg         : in unsigned(15 downto 0);
+           clk_rom            : out std_logic;
+           adress             : out unsigned(6 downto 0)
     );
 end entity;
 
@@ -32,6 +32,10 @@ begin
             adress_signed <= resize((signed(resize(instr(11 downto 5),7)) + signed(resize(adress_s,7))), 7) - 1;
             adress_s <= unsigned(adress_signed);
             clk_rom <= '1'; 
+        elsif ((instr(15 downto 12) = "1100") and reg(to_integer(instr(8 downto 5))) = '0') then
+            adress_signed <= resize((signed("11" & instr(4 downto 0)) + signed(resize(adress_s,7))), 7) - 1;
+            adress_s <= unsigned(adress_signed);
+            clk_rom <= '1';
         elsif state = "00" then 
             adress_s <= adress_s + 1;
         end if;

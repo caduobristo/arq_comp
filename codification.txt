@@ -12,7 +12,7 @@ MOVX - 1000DDDxxxxxxxxx - Move do endereço de RAM  @Ri para o acumulador
 LI   - 1001DDDACCCCCCCC - Carrega o acumulador ou registrador com constante
 CMPI - 1010DDDCCCCCCCCC - Faz comparações
 JMP  - 1011EEEEEEExxxxx - Pula para endereço absoluto
-CLR  - 1100xxxxxxxxxxxx - Limpa o acumulador
+JNB  - 1100DDDBBBBCCCCC - Pula enquanto bit n não está setado
 JZ   - 1101CCCCCCCxxxxx - Pulo indireto se Z = '0'
 JC   - 1110CCCCCCCxxxxx - Pulo indireto se C = '1'
 MOVX - 1111DDDxxxxxxxxx - Move o acumulador para o endereço de RAM @Ri
@@ -23,6 +23,7 @@ SUB: x = não importa
      E = endereço
      A = 1 -> acumulador
          0 -> registrador
+     B = bit examinado
 
 REGISTER CODE: zero => 000
                R1   => 001

@@ -20,10 +20,10 @@ end control_unit;
 architecture a_control_unit of control_unit is
 component adder is 
     port ( clk, rst, z, carry : in std_logic;
-           state                  : in unsigned(1 downto 0);
-           instr                  : in unsigned(15 downto 0);
-           clk_rom                : out std_logic;
-           adress                 : out unsigned(6 downto 0)
+           state              : in unsigned(1 downto 0);
+           instr, reg         : in unsigned(15 downto 0);
+           clk_rom            : out std_logic;
+           adress             : out unsigned(6 downto 0)
     );
 end component;
 
@@ -32,7 +32,7 @@ end component;
     signal clk_rom_s    : std_logic;
 begin
 
-    uut_adder: adder port map( clk, rst, z, carry, state, instr, clk_rom_s, adress);
+    uut_adder: adder port map( clk, rst, z, carry, state, instr, reg_out, clk_rom_s, adress);
 
     opcode <= instr(15 downto 12);
     reg <= instr(11 downto 9);
@@ -51,8 +51,7 @@ begin
     mux_acc <= "00" when opcode = "0111" or 
                          opcode = "1010" else
                "01" when (opcode = "1001" and
-                         instr(8) = '1') or
-                         opcode = "1100" else
+                         instr(8) = '1') else
                "10" when opcode = "1000" else
                "11";  
     
@@ -83,7 +82,6 @@ begin
                         opcode = "0100" or
                         opcode = "0101" or
                         opcode = "0110" or
-                        opcode = "1100" or
                         opcode = "1000" or
                         (opcode = "0111" and
                         instr(8) = '1') or

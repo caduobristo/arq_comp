@@ -29,7 +29,7 @@ begin
             clk_rom <= '1'; 
         elsif ((instr(15 downto 12) = "1101") and z = '0') or
               ((instr(15 downto 12) = "1110") and carry = '1') then
-            adress_signed <= resize((signed(resize(instr(11 downto 5),7)) + signed(resize(adress_s,7))), 7) - 1;
+            adress_signed <= resize((signed("11" & instr(11 downto 5)) + signed(resize(adress_s,7))), 7) - 1;
             adress_s <= unsigned(adress_signed);
             clk_rom <= '1'; 
         elsif ((instr(15 downto 12) = "1100") and reg(to_integer(instr(8 downto 5))) = '0') then

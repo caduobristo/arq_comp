@@ -27,16 +27,21 @@ component adder is
     );
 end component;
 
-    signal opcode       : unsigned(3 downto 0);
-    signal ram_adress_s : unsigned(6 downto 0);
-    signal clk_rom_s    : std_logic;
+    signal opcode       : unsigned(3 downto 0) := (others => '0');
+    signal ram_adress_s : unsigned(6 downto 0) := (others => '0');
+    signal clk_rom_s    : std_logic := '0';
 begin
 
     uut_adder: adder port map( clk, rst, z, carry, state, instr, reg_out, clk_rom_s, adress);
 
     opcode <= instr(15 downto 12);
     reg <= instr(11 downto 9);
-    ram_adress <= reg_out(6 downto 0);
+
+    ram_adress_s <= reg_out(6 downto 0) when opcode = "1000" or
+                                             opcode = "1111" else
+                    ram_adress_s;
+
+    ram_adress <= ram_adress_s;
 
     const <= resize(instr(11 downto 0), 16) when opcode = "0010" or
                                                  opcode = "0100" else

@@ -4,6 +4,7 @@ use ieee.numeric_std.all;
 
 entity processador is 
     port( clk, rst       : in std_logic;
+          exception      : out std_logic;
           state          : out unsigned(1 downto 0);
           pc             : out unsigned(6 downto 0);
           instr, ram_out : out unsigned(15 downto 0);
@@ -85,8 +86,8 @@ architecture a_processador of processador is
         );
     end component;
 
-    signal z_s, z, carry_s, carry, wr_ram, wr_carry, wr_z: std_logic := '0';
-    signal clk_rom, mux_ula, mux_ban, wr_en_a      : std_logic := '0';
+    signal z_s, z, carry_s, carry, wr_ram, wr_carry, wr_z  : std_logic := '0';
+    signal clk_rom, mux_ula, mux_ban, wr_en_a, exception_s : std_logic := '0';
     signal control_ula, state_s                    : unsigned(1 downto 0) := "00";
     signal mux_acc                                 : std_logic_vector(1 downto 0) := "00";
     signal reg_in, wrt_ban                         : unsigned(2 downto 0) := "000";
@@ -107,13 +108,15 @@ begin
     uut_carry : reg1bit port map( clk, rst, wr_carry, carry_s, carry );
 
     uut_z : reg1bit port map( clk, rst, wr_z, z_s, z );
+    
+    uut_exception : reg1bit port map( clk, rst, '1', exception_s, exception );
 
     uut_state_machine: state_machine port map ( clk, rst, state_s );
 
-    uut_control_unit: control_unit port map ( clk, rst, z, carry, state_s,
-                                              instr_s, reg_out, clk_rom, mux_ula, mux_ban, wr_en_a, 
-                                              wr_ram, wr_carry, wr_z, mux_acc, control_ula, reg_in, wrt_ban, 
-                                              adress_in, ram_adress, const );
+    uut_control_unit: control_unit port map ( clk, rst, z, carry, state_s, instr_s, reg_out,
+                                              clk_rom, mux_ula, mux_ban, wr_en_a, 
+                                              wr_ram, wr_carry, wr_z, mux_acc, control_ula, 
+                                              reg_in, wrt_ban, adress_in, ram_adress, const );
 
     uut_pc: program_counter port map ( clk_rom, '1', rst, adress_in, adress_out );
 

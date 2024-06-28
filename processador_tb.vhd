@@ -8,6 +8,7 @@ end processador_tb;
 architecture a_processador_tb of processador_tb is
     component processador is
         port( clk, rst       : in std_logic;
+              exception      : out std_logic;
               state          : out unsigned(1 downto 0);
               pc             : out unsigned(6 downto 0);
               instr, ram_out : out unsigned(15 downto 0);
@@ -19,15 +20,16 @@ architecture a_processador_tb of processador_tb is
     constant period_time    : time      := 100 ns;
     signal   finished       : std_logic := '0';
     signal   clk, rst       : std_logic;
-    signal   state          :  unsigned(1 downto 0);
+    signal   exception      : std_logic;
+    signal   state          : unsigned(1 downto 0);
     signal   pc             : unsigned(6 downto 0);
     signal   instr, ram_out : unsigned(15 downto 0);
     signal   a, ula_out     : unsigned(15 downto 0);
     signal   reg0, reg1, reg2, reg3, reg4, reg5, reg6, reg7 : unsigned(15 downto 0);
     
 begin
-    uut_processador: processador port map( clk, rst, state, pc, instr, ram_out, a, ula_out,
-                                           reg0, reg1, reg2, reg3, reg4, reg5, reg6, reg7 );
+    uut_processador: processador port map( clk, rst, exception, state, pc, instr, ram_out, a,
+                                           ula_out,reg0, reg1, reg2, reg3, reg4, reg5, reg6, reg7 );
 
     reset_global: process
     begin

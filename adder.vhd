@@ -14,7 +14,7 @@ end entity;
 architecture a_adder of adder is
     
     signal adress_s : unsigned(6 downto 0) := (others => '0');
-    signal adress_signed : signed(6 downto 0);
+    signal adress_signed : signed(6 downto 0) := (others => '0');
 begin
 
 

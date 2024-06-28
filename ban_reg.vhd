@@ -19,8 +19,8 @@ architecture a_ban_reg of ban_reg is
     end component;  
 
     signal zero : unsigned(15 downto 0) := "0000000000000000";
-    signal mux  : unsigned(6 downto 0);
-    signal reg1_s, reg2_s, reg3_s, reg4_s, reg5_s, reg6_s, reg7_s : unsigned(15 downto 0);
+    signal mux  : unsigned(6 downto 0) := (others => '0');
+    signal reg1_s, reg2_s, reg3_s, reg4_s, reg5_s, reg6_s, reg7_s : unsigned(15 downto 0) := (others => '0');
 
 begin   
     mux <= "0000001" when wrt = "001" else

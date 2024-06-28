@@ -9,7 +9,7 @@ entity reg1bit is
 end entity;
 
 architecture a_reg1bit of reg1bit is
-    signal registro : std_logic;
+    signal registro : std_logic := '0';
 begin
 
     process(clk, rst, wr_en)

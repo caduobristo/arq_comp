@@ -13,7 +13,7 @@ end entity ula;
 
 architecture a_ula of ula is
     signal saida_s                       : unsigned(15 downto 0) := (others => 'X');
-    signal e0_s17, e1_s17, s17           : unsigned(16 downto 0);
+    signal e0_s17, e1_s17, s17           : unsigned(16 downto 0) := (others => '0');
 begin                                   
     saida_s <= resize(entrada0 + entrada1, saida'length) when control = "00" else
                entrada0-entrada1                         when control = "01" else

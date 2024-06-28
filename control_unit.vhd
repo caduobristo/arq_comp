@@ -32,9 +32,10 @@ end component;
     signal clk_rom_s, exception_s : std_logic := '0';
 begin
 
-    uut_adder: adder port map( clk, rst, z, carry, state, instr, reg_out, clk_rom_s, exception, adress);
+    uut_adder: adder port map( clk, rst, z, carry, state, instr, reg_out, clk_rom_s, exception_s, adress);
     opcode <= instr(15 downto 12);
     reg <= instr(11 downto 9);
+    exception <= exception_s;
 
     ram_adress_s <= reg_out(6 downto 0) when opcode = "1000" or
                                              opcode = "1111" else
@@ -48,8 +49,9 @@ begin
              resize(instr(8 downto 0), 16)  when opcode = "1010" else
              (others => '0');
 
-    clk_rom <= '1' when state = "00" or
-                        clk_rom_s = '1' else
+    clk_rom <= '1' when (state = "00" or
+                        clk_rom_s = '1') and
+                        exception_s = '0' else
                '0';  
   
     mux_acc <= "00" when opcode = "0111" or 

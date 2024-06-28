@@ -6,7 +6,7 @@ entity control_unit is
     port ( clk, rst, z, carry           : in std_logic;
            state                        : in unsigned(1 downto 0);
            instr, reg_out               : in unsigned(15 downto 0);
-           clk_rom                      : out std_logic := '0';
+           clk_rom, exception           : out std_logic := '0';
            mux_ula, mux_ban             : out std_logic;
            wr_en_a, wr_en_ram, wr_carry, wr_z : out std_logic;
            mux_acc                      : out std_logic_vector(1 downto 0);
@@ -22,18 +22,17 @@ component adder is
     port ( clk, rst, z, carry : in std_logic;
            state              : in unsigned(1 downto 0);
            instr, reg         : in unsigned(15 downto 0);
-           clk_rom            : out std_logic;
+           clk_rom, exception : out std_logic;
            adress             : out unsigned(6 downto 0)
     );
 end component;
 
     signal opcode       : unsigned(3 downto 0) := (others => '0');
     signal ram_adress_s : unsigned(6 downto 0) := (others => '0');
-    signal clk_rom_s    : std_logic := '0';
+    signal clk_rom_s, exception_s : std_logic := '0';
 begin
 
-    uut_adder: adder port map( clk, rst, z, carry, state, instr, reg_out, clk_rom_s, adress);
-
+    uut_adder: adder port map( clk, rst, z, carry, state, instr, reg_out, clk_rom_s, exception, adress);
     opcode <= instr(15 downto 12);
     reg <= instr(11 downto 9);
 

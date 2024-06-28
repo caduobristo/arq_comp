@@ -1,37 +1,37 @@
 v 4
-file . "processador_tb.vhd" "7d0b4cadbe1b02997425a3626b1f801593efd7bd" "20240627233027.798":
+file . "processador_tb.vhd" "7d0b4cadbe1b02997425a3626b1f801593efd7bd" "20240628180917.354":
   entity processador_tb at 1( 0) + 0 on 33;
   architecture a_processador_tb of processador_tb at 8( 123) + 0 on 34;
-file . "program_counter.vhd" "a995dc0167f8a3cd9f74277bcea037f712dd5619" "20240627233027.302":
+file . "program_counter.vhd" "a995dc0167f8a3cd9f74277bcea037f712dd5619" "20240628180917.072":
   entity program_counter at 1( 0) + 0 on 29;
   architecture a_program_counter of program_counter at 12( 278) + 0 on 30;
-file . "control_unit.vhd" "ee97123a647bdf7d1ec3daa0535d37fb88e38cd8" "20240627233026.799":
+file . "control_unit.vhd" "f3d12f946de18a1548f0bd0133cb07d6451736cd" "20240628180916.810":
   entity control_unit at 1( 0) + 0 on 25;
   architecture a_control_unit of control_unit at 20( 861) + 0 on 26;
-file . "state_machine.vhd" "ca221b76593b8bd2d0c2477f92636b9d05a48873" "20240627233026.339":
+file . "state_machine.vhd" "ca221b76593b8bd2d0c2477f92636b9d05a48873" "20240628180916.563":
   entity state_machine at 1( 0) + 0 on 21;
   architecture a_state_machine of state_machine at 11( 214) + 0 on 22;
-file . "rom.vhd" "e1de74311f4a4e92e56c7c5b78bbca8c3234ae1b" "20240627233025.876":
+file . "rom.vhd" "e1de74311f4a4e92e56c7c5b78bbca8c3234ae1b" "20240628180916.338":
   entity rom at 1( 0) + 0 on 17;
   architecture a_rom of rom at 12( 230) + 0 on 18;
-file . "reg1bit.vhd" "3935fe7356f9922fb3cf38e0654515d2f144faf7" "20240627233025.426":
+file . "reg1bit.vhd" "3935fe7356f9922fb3cf38e0654515d2f144faf7" "20240628180916.108":
   entity reg1bit at 1( 0) + 0 on 13;
   architecture a_reg1bit of reg1bit at 11( 220) + 0 on 14;
-file . "reg16bits.vhd" "49b8a5d534624cf6e9c92944d83196773640f47d" "20240627233025.197":
+file . "reg16bits.vhd" "49b8a5d534624cf6e9c92944d83196773640f47d" "20240628180915.984":
   entity reg16bits at 1( 0) + 0 on 11;
   architecture a_reg16bits of reg16bits at 12( 274) + 0 on 12;
-file . "ban_reg.vhd" "3d52b47cf57496ec9b84b3547d0cb53630f9b5f5" "20240627233025.652":
+file . "ban_reg.vhd" "3d52b47cf57496ec9b84b3547d0cb53630f9b5f5" "20240628180916.219":
   entity ban_reg at 1( 0) + 0 on 15;
   architecture a_ban_reg of ban_reg at 13( 360) + 0 on 16;
-file . "ram.vhd" "03bea58ff8d88101b40960fa1246fea4bdb3c2b6" "20240627233026.098":
+file . "ram.vhd" "03bea58ff8d88101b40960fa1246fea4bdb3c2b6" "20240628180916.451":
   entity ram at 1( 0) + 0 on 19;
   architecture a_ram of ram at 13( 300) + 0 on 20;
-file . "adder.vhd" "b54c8f080b7d48e79e0c87b65f40fbd5d239bf8f" "20240627233026.564":
+file . "adder.vhd" "b6b8ff6b2512ced73c1755ea625dc783bd5a2d10" "20240628180916.693":
   entity adder at 1( 0) + 0 on 23;
   architecture a_adder of adder at 14( 384) + 0 on 24;
-file . "ula.vhd" "3b05386bff3bbf5aa5892753208f10c093c2ad4e" "20240627233027.065":
+file . "ula.vhd" "3b05386bff3bbf5aa5892753208f10c093c2ad4e" "20240628180916.934":
   entity ula at 1( 0) + 0 on 27;
   architecture a_ula of ula at 14( 361) + 0 on 28;
-file . "processador.vhd" "0d37c2cc3aaa0ae6cdba0feebf9f87c0e25104c1" "20240627233027.541":
+file . "processador.vhd" "06d1d3cc645d89f1738bd65ea68e7fef3686a7be" "20240628180917.183":
   entity processador at 1( 0) + 0 on 31;
   architecture a_processador of processador at 15( 513) + 0 on 32;

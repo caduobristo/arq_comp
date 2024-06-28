@@ -67,7 +67,7 @@ architecture a_processador of processador is
         port ( clk, rst, Z, carry           : in std_logic;
                state                        : in unsigned(1 downto 0);
                instr, reg_out               : in unsigned(15 downto 0);
-               clk_rom                      : out std_logic := '0';
+               clk_rom, exception           : out std_logic := '0';
                mux_ula, mux_ban             : out std_logic;
                wr_en_a, wr_en_ram, wr_carry, wr_z : out std_logic;
                mux_acc                      : out std_logic_vector(1 downto 0);
@@ -114,7 +114,7 @@ begin
     uut_state_machine: state_machine port map ( clk, rst, state_s );
 
     uut_control_unit: control_unit port map ( clk, rst, z, carry, state_s, instr_s, reg_out,
-                                              clk_rom, mux_ula, mux_ban, wr_en_a, 
+                                              clk_rom, exception_s, mux_ula, mux_ban, wr_en_a, 
                                               wr_ram, wr_carry, wr_z, mux_acc, control_ula, 
                                               reg_in, wrt_ban, adress_in, ram_adress, const );
 
